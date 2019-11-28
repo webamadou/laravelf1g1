@@ -1,0 +1,1 @@
+<h1>Je index de products</h1>

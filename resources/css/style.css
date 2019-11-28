@@ -1,0 +1,76 @@
+/**
+design customizing the template
+*/
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Roboto", sans-serif;
+}
+.bg-dark {
+  background-color: #004085 !important;
+  border-bottom: 3px solid #04203e;
+}
+.navbar-dark .navbar-brand {
+  color: #e66a10;
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-size: x-large;
+}
+.navbar-dark .navbar-brand .logo-e {
+  color: #fff;
+  font-weight: normal;
+  letter-spacing: -1px;
+}
+a.navbar-brand:after {
+  content: "";
+  display: inline-block;
+  border-bottom: 2px solid #ffffff;
+  width: 81px;
+  position: absolute;
+  bottom: 17px;
+  left: 93px;
+}
+.carousel-item {
+  position: relative;
+  width: 100vw;
+}
+.carousel-item img {
+  position: absolute;
+  z-index: 1;
+  width: 100vw !important;
+  height: 100%;
+}
+.carousel-item .carousel-caption.d-none.d-md-block {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  left: initial;
+  background: rgba(8, 8, 8, 0.5);
+  text-align: left;
+  width: 50vw;
+  height: 100%;
+  padding: 0 2vw;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+}
+.carousel-item .carousel-caption.d-none.d-md-block p {
+  color: #cacaca;
+}
+.carousel-item .carousel-caption.d-none.d-md-block h5 {
+  font-size: 3rem;
+  font-weight: 300;
+  margin: 0;
+  padding: 0;
+  color: #ffffff;
+}
+.bloc-title {
+  font-weight: 100;
+  text-align: center;
+  font-size: 1.9rem;
+}
