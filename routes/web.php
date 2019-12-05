@@ -15,4 +15,21 @@ Route::get('/', "HomeController@index");
 
 Route::get("/products/{id}", "HomeController@show");
 
+Route::get("/categories", "CategoriesController@index")->name('categories.index');
+
+Route::get('/categories/form','CategoriesController@create')->name('categories.create');
+
+Route::post('/categorie/traitement','CategoriesController@store');
+
+Route::resource('categories','CategoriesController');
+
+Route::get("/product/edit/{id}", "ProductsController@edit")->name("editer_produit");
+Route::patch("/product/edit/{id}", "ProductsController@update")->name('updater_produit');
+
+
+Route::resource('product', 'ProductsController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
 
