@@ -14,7 +14,7 @@
 Route::get('/', "HomeController@index");
 
 Route::get("/products/{id}", "HomeController@show");
-
+# -------- CATEGORIES ----------
 Route::get("/categories", "CategoriesController@index")->name('categories.index');
 
 Route::get('/categories/form','CategoriesController@create')->name('categories.create');

@@ -2,11 +2,6 @@
 
 @section('content')
     <div class="container">
-        @if($errors->any())
-            @foreach($errors->all() as $error)
-                <div class="alert alert-danger">{{$error}}</div>
-            @endforeach
-        @endif
         <div><p><a href="{{route('product.index')}}">{{__('Retourner ver la liste')}}</a></p></div>
         <div class="container">
             <form action="{{route('product.store')}}" method="post" enctype="multipart/form-data">

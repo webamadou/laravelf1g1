@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.design')
 
 @section('content')
     <div class="container">
@@ -9,7 +9,10 @@
                 <div>
                     <input type="text" name="name" class="form-control">
                 </div>
-                <div>
+                <div class="form-group">
+                    <label for="on_menu" class="form-check-label">Afficher la category sur le menu <input class="form-control" type="checkbox" id="on_menu" name="on_menu" value="1"></label>
+                </div>
+                <div class="mt-5">
                     <button class="btn btn-primary">Enregistrer</button>
                 </div>
             </form>
