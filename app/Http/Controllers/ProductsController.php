@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Product;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -15,6 +16,11 @@ class ProductsController extends Controller
      *
      *
      */
+    public function __construct()
+    {
+       // $this->middleware('auth')->except('index');
+    }
+
     public function index()
     {
         $products = \App\Product::orderBy('created_at', 'DESC')->get();
@@ -38,6 +44,7 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
+        $user_id = Auth::id();
         $request->validate([
             "name"=>"required|max:300|min:5",
             "price"=>"required|numeric",
@@ -57,10 +64,11 @@ class ProductsController extends Controller
             //Maintenant nous pouvons enregistrer l'image dans le dossier en utilisant la methode uploadImage();
             $this->uploadImage($image, $folder, 'public', $image_name);
         }
-        $produit->name = $request->input('name');
-        $produit->price = $request->input('price');
-        $produit->description = $request->input('description');
-        $produit->category_id = $request->input('category_id');
+        $produit->name          = $request->input('name');
+        $produit->price         = $request->input('price');
+        $produit->description   = $request->input('description');
+        $produit->category_id   = $request->input('category_id');
+        $produit->user_name     = Auth::id();
         $produit->save();
         return redirect(route('product.index'));
     }
