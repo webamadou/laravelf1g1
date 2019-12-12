@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Auth\Access\Gate;
 use Illuminate\Http\Request;
 use App\Product;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
+use Illuminate\Support\Str ;
 
 class ProductsController extends Controller
 {
@@ -19,12 +20,7 @@ class ProductsController extends Controller
     public function __construct()
     {
        // $this->middleware('auth')->except('index');
-    }
-
-    public function index()
-    {
-        $products = \App\Product::orderBy('created_at', 'DESC')->get();
-        return view('products.index', compact('products'));
+        #$this->authorize('admin');
     }
 
     /**
@@ -34,6 +30,13 @@ class ProductsController extends Controller
     {
         $categories = \App\Category::pluck('name','id');
         return view('products.create', compact('categories'));
+    }
+
+    public function index()
+    {
+        $this->authorize('admin');
+        $products = \App\Product::orderBy('created_at', 'DESC')->get();
+        return view('products.index', compact('products'));
     }
 
     /**
@@ -97,6 +100,7 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('admin');
         $product = \App\Product::find($id);
         $categories = \App\Category::pluck('name','id');
         return view('products.edit', compact('product','categories'));
