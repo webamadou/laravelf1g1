@@ -19,7 +19,7 @@
                     <input type="text" name="price" class="form-control" placeholder="Le prix du produit" value="{{$product->price}}">
                 </div>
                 <div>
-                    <textarea name="description" id="description" cols="30" rows="10" class="form-control" placeholder="La description">{{$product->description}}</textarea>
+                    <textarea name="description" id="description" cols="30" rows="10" class="description form-control" placeholder="La description">{{$product->description}}</textarea>
                 </div>
                 <div>
                     <select name="category_id" id="category_id" class="form-control">

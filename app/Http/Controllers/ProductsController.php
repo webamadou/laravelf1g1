@@ -100,7 +100,7 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        $this->authorize('admin');
+        //$this->authorize('admin');
         $product = \App\Product::find($id);
         $categories = \App\Category::pluck('name','id');
         return view('products.edit', compact('product','categories'));
