@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\TestMailling;
 use Illuminate\Auth\Access\Gate;
 use Illuminate\Http\Request;
 use App\Product;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str ;
+use Yajra\DataTables\DataTables;
 
 class ProductsController extends Controller
 {
@@ -31,10 +34,28 @@ class ProductsController extends Controller
         $categories = \App\Category::pluck('name','id');
         return view('products.create', compact('categories'));
     }
-
-    public function index()
+    public function mail()
     {
-        $this->authorize('admin');
+        $name = 'Krunal';
+        Mail::to('krunal@appdividend.com')->send(new TestMailling($name));
+
+        return 'Email was sent';
+    }
+    public function index(Request $request)
+    {
+
+        if($request->ajax()){
+            $data = Product::latest()->select('name','price','category_id')->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+                    $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+        #$this->authorize('admin');
         $products = \App\Product::orderBy('created_at', 'DESC')->get();
         return view('products.index', compact('products'));
     }

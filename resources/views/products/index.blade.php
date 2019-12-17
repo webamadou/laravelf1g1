@@ -8,28 +8,33 @@
             <a href="/">Accueil</a>
         </p>
     </div>
-    <table class="table table-striped">
-        <tr>
-            <th>#</th>
-            <th>Nom Produit</th>
-            <th>Prix Produit</th>
-            <th></th>
-        </tr>
-        @foreach($products as $product)
+        <table class="table table-bordered data-table">
+            <thead>
             <tr>
-                <th>#</th>
-                <th>{{$product->name}} - <img src="{{$product->images ? asset($product->images) : asset('uploads/images/default.png')}}" alt="{{$product->name}}" width="50"></th>
-                <th>{{$product->price}} {{ $product->category->name ?? '' }}</th>
-                <th>
-                    <p><a href="{{route('editer_produit',['id'=>$product->id])}}" class="btn btn-primary">Editer</a></p>
-                    <form action="product/{{$product->id}}" method="post">
-                        @csrf
-                        @method('delete')
-                        <input type="submit" class="btn btn-danger" name="delete" value="Supprimer">
-                    </form>
-                </th>
+                <th>No</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th width="100px">Action</th>
             </tr>
-        @endforeach
-    </table>
-</div>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+<script>
+    alert("cela se passe ici");
+    $(function(){
+        var table = $('.data-table').Datatable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{route('products.index')}}",
+            columns: [
+                {data: "DT_RpwIndex", name: "DT_RowIndex"},
+                {data: 'name', name: "name"},
+                {data: "price", name: "price"},
+                {data:'action', name: "action", orderable: false, searchable: false}
+            ]
+        });
+    })
+</script>
 @endsection

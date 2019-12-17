@@ -29,9 +29,13 @@ Route::patch("/product/edit/{id}", "ProductsController@update")->name('updater_p
 
 Route::resource('product', 'ProductsController');
 
+Route::get('products', 'ProductsController@index')->name('products.index');
+
 Route::delete('product/{id}', 'ProductsController@destroy');
 
 Auth::routes();
+
+Route::get('/send/email', 'ProductsController@mail');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
